@@ -16,6 +16,7 @@ public class Snake : MonoBehaviour {
     [SerializeField] private SpawnFood gameManager;
     [SerializeField] private Text scoreText;
     private int score;
+    private bool moved = false;
 
 
     // --------- Métodos API -------------
@@ -32,21 +33,25 @@ public class Snake : MonoBehaviour {
     void Update()
     {
         // Controles de dirección
-        if (Input.GetKey(KeyCode.RightArrow) && dir != Vector2.left)
+        if (Input.GetKey(KeyCode.RightArrow) && dir != Vector2.left && !moved)
         {
             dir = Vector2.right;
+            moved = true;
         }
-        else if (Input.GetKey(KeyCode.DownArrow) && dir != Vector2.up)
+        else if (Input.GetKey(KeyCode.DownArrow) && dir != Vector2.up && !moved)
         {
             dir = Vector2.down;
+            moved = true;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) && dir != Vector2.right)
+        else if (Input.GetKey(KeyCode.LeftArrow) && dir != Vector2.right && !moved)
         {
             dir = Vector2.left;
+            moved = true;
         }
-        else if (Input.GetKey(KeyCode.UpArrow) && dir != Vector2.down)
+        else if (Input.GetKey(KeyCode.UpArrow) && dir != Vector2.down && !moved)
         {
             dir = Vector2.up;
+            moved = true;
         }
 
     }
@@ -83,11 +88,13 @@ public class Snake : MonoBehaviour {
 
     void Move()
     {
+        moved = false;
         //Salvamos la posición actual
         Vector2 v = transform.position;
 
         //Movemos la cabeza a la nueva dirección
         transform.Translate(dir);
+
         if (comio)
         {
             GameObject g = Instantiate(tailPrefab, v, Quaternion.identity);
