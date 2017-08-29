@@ -9,12 +9,12 @@ using System;
 public class Snake : MonoBehaviour {
 
     // Vector de dirección que por default será a la derecha.
-    Vector2 dir = Vector2.right;
-    List<Transform> tails = new List<Transform>();
-    bool comio = false;
-    public GameObject tailPrefab;
     [SerializeField] private SpawnFood gameManager;
     [SerializeField] private Text scoreText;
+    [SerializeField] public GameObject tailPrefab;
+    private Vector2 dir = Vector2.right;
+    private List<Transform> tails = new List<Transform>();
+    private bool comio = false;
     private int score;
     private bool moved = false;
 
